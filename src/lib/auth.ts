@@ -1,11 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
 import bcryptjs from 'bcryptjs';
 import { connectDB } from './db/mongodb';
-import { User } from './db/models';
 import { InMemoryDB } from './db/inMemoryDB';
-import { NextRequest, NextResponse } from 'next/server';
 
 declare module 'next-auth' {
   interface User {
@@ -29,62 +26,57 @@ declare module 'next-auth/jwt' {
 
 const authConfig = {
   providers: [
-    // GoogleProvider - Commented out until credentials are configured
-    // GoogleProvider({
-    //   clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    //   allowDangerousEmailAccountLinking: true,
-    // }),
     CredentialsProvider({
+      name: 'credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials: any) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        const email = credentials.email.toLowerCase().trim();
 
         try {
+          // Try MongoDB first
           const mongoConnection = await connectDB();
+          
+          if (mongoConnection) {
+            const db = mongoConnection.connection.db;
+            const user = await db.collection('users').findOne({ email });
 
-          // Use in-memory database if MongoDB is not available
-          if (!mongoConnection || !process.env.MONGODB_URI) {
-            console.log('📝 Using in-memory database for authentication');
-            const user = await InMemoryDB.findUserByEmail(credentials.email);
-
-            if (!user || !user.password) return null;
-
-            const isValid = await bcryptjs.compare(
-              credentials.password as string,
-              user.password as string
-            );
-
-            if (!isValid) return null;
-
-            return {
-              id: user.id,
-              email: user.email,
-              name: user.name,
-              image: user.image,
-            };
+            if (user && user.password) {
+              const isValid = await bcryptjs.compare(credentials.password, user.password);
+              if (isValid) {
+                return {
+                  id: user._id.toString(),
+                  email: user.email,
+                  name: user.name,
+                  image: user.image,
+                };
+              }
+            }
+            return null;
           }
 
-          // Use MongoDB
-          const user = await User.findOne({ email: credentials.email });
+          // Fallback to in-memory DB
+          const memUser = await InMemoryDB.findUserByEmail(email);
+          if (!memUser || !memUser.password) {
+            return null;
+          }
 
-          if (!user || !user.password) return null;
-
-          const isValid = await bcryptjs.compare(
-            credentials.password as string,
-            user.password as string
-          );
-
-          if (!isValid) return null;
+          const isValid = await bcryptjs.compare(credentials.password, memUser.password);
+          if (!isValid) {
+            return null;
+          }
 
           return {
-            id: (user as any)._id.toString(),
-            email: user.email,
-            name: user.name,
-            image: user.image,
+            id: memUser.id,
+            email: memUser.email,
+            name: memUser.name,
+            image: memUser.image,
           };
         } catch (error) {
           console.error('Auth error:', error);
@@ -94,26 +86,6 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: any) {
-      try {
-        await connectDB();
-        let dbUser = await User.findOne({ email: user.email });
-
-        if (!dbUser) {
-          dbUser = await User.create({
-            email: user.email,
-            name: user.name,
-            image: user.image,
-            googleId: account?.providerAccountId,
-          });
-        }
-
-        return true;
-      } catch (error) {
-        console.error('SignIn callback error:', error);
-        return true;
-      }
-    },
     async jwt({ token, user }: any) {
       if (user) {
         token.id = user.id;
@@ -133,6 +105,7 @@ const authConfig = {
   session: {
     strategy: 'jwt' as const,
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authConfig);

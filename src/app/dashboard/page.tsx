@@ -19,6 +19,7 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const [volleyballCount, setVolleyballCount] = useState(0);
+  const [volleyballToday, setVolleyballToday] = useState(0);
   const [showSpotify, setShowSpotify] = useState(false);
   const [spotifyLoading, setSpotifyLoading] = useState(false);
   const [spotifyError, setSpotifyError] = useState<string | null>(null);
@@ -32,23 +33,44 @@ export default function DashboardPage() {
     }
   }, [status, router]);
 
+  // Fetch volleyball count from database
   useEffect(() => {
-    const stored = localStorage.getItem('volleyballCount');
-    if (stored) {
-      setVolleyballCount(Number(stored));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handler = () => {
-      const stored = localStorage.getItem('volleyballCount');
-      if (stored) {
-        setVolleyballCount(Number(stored));
+    const fetchVolleyballCount = async () => {
+      if (session?.user?.email) {
+        try {
+          const res = await fetch(`/api/volleyball?email=${encodeURIComponent(session.user.email)}`);
+          if (res.ok) {
+            const data = await res.json();
+            setVolleyballCount(data.count || 0);
+            setVolleyballToday(data.todayCount || 0);
+          }
+        } catch (error) {
+          console.error('Failed to fetch volleyball count:', error);
+        }
       }
     };
-    window.addEventListener('storage', handler);
-    return () => window.removeEventListener('storage', handler);
-  }, []);
+    fetchVolleyballCount();
+  }, [session?.user?.email]);
+
+  // Refresh count when window gains focus (in case they played the game in another tab)
+  useEffect(() => {
+    const handleFocus = async () => {
+      if (session?.user?.email) {
+        try {
+          const res = await fetch(`/api/volleyball?email=${encodeURIComponent(session.user.email)}`);
+          if (res.ok) {
+            const data = await res.json();
+            setVolleyballCount(data.count || 0);
+            setVolleyballToday(data.todayCount || 0);
+          }
+        } catch (error) {
+          console.error('Failed to fetch volleyball count:', error);
+        }
+      }
+    };
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [session?.user?.email]);
 
   const loadSpotify = async () => {
     setSpotifyLoading(true);
@@ -97,11 +119,17 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-2">
+        <div className="grid md:grid-cols-4 gap-6 mb-2">
           <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-yellow-500 transition">
             <h3 className="text-gray-400 text-sm mb-2">Total Volleyballs Caught</h3>
             <p className="text-5xl font-bold text-yellow-400">{volleyballCount}</p>
-            <p className="text-gray-300 text-sm mt-4">Keep playing to increase! 🏐</p>
+            <p className="text-gray-300 text-sm mt-4">All time score 🏐</p>
+          </div>
+
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-orange-500 transition">
+            <h3 className="text-gray-400 text-sm mb-2">Caught Today</h3>
+            <p className="text-5xl font-bold text-orange-400">{volleyballToday}</p>
+            <p className="text-gray-300 text-sm mt-4">Today's score 🔥</p>
           </div>
 
           <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition">

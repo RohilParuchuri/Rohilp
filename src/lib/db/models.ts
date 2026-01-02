@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
 // User Schema
@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
       lowercase: true,
+      index: true,
     },
     name: String,
     image: String,
@@ -20,22 +21,29 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    volleyballsToday: {
+      type: Number,
+      default: 0,
+    },
+    lastPlayedDate: {
+      type: String,
+      default: '',
+    },
   },
   { timestamps: true }
 );
 
 // Hash password before saving
-userSchema.pre('save', async function (next: any) {
-  const doc = this as any;
-  if (!doc.isModified('password')) return next();
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
   
   try {
     const salt = await bcryptjs.genSalt(10);
-    if (doc.password) {
-      doc.password = await bcryptjs.hash(doc.password as string, salt);
+    if (this.password) {
+      this.password = await bcryptjs.hash(this.password, salt);
     }
     next();
-  } catch (error) {
+  } catch (error: any) {
     next(error);
   }
 });
@@ -56,5 +64,13 @@ const blogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = mongoose.models.User || mongoose.model('User', userSchema);
-export const BlogPost = mongoose.models.BlogPost || mongoose.model('BlogPost', blogSchema);
+// Helper function to get or create model
+function getModel<T>(name: string, schema: mongoose.Schema): Model<T> {
+  if (mongoose.models[name]) {
+    return mongoose.models[name] as Model<T>;
+  }
+  return mongoose.model<T>(name, schema);
+}
+
+export const User = getModel<any>('User', userSchema);
+export const BlogPost = getModel<any>('BlogPost', blogSchema);

@@ -1,8 +1,7 @@
 import { connectDB } from '@/lib/db/mongodb';
-import { User } from '@/lib/db/models';
 import { InMemoryDB } from '@/lib/db/inMemoryDB';
-import bcryptjs from 'bcryptjs';
 import { NextResponse } from 'next/server';
+import bcryptjs from 'bcryptjs';
 
 export async function POST(req: Request) {
   try {
@@ -10,57 +9,88 @@ export async function POST(req: Request) {
 
     if (!email || !password || !name) {
       return NextResponse.json(
-        { error: 'Missing fields' },
+        { error: 'Please fill in all fields' },
         { status: 400 }
       );
     }
 
-    // Try to connect to MongoDB
-    const mongoConnection = await connectDB();
+    const normalizedEmail = email.toLowerCase().trim();
 
-    if (!mongoConnection || !process.env.MONGODB_URI) {
-      // Use in-memory database
-      console.log('📝 Using in-memory database for user creation');
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      return NextResponse.json(
+        { error: 'Password must be at least 6 characters' },
+        { status: 400 }
+      );
+    }
+
+    // Try MongoDB first
+    const mongoConnection = await connectDB();
+    
+    if (mongoConnection) {
+      const db = mongoConnection.connection.db;
       
-      try {
-        const user = await InMemoryDB.createUser({ email, password, name });
-        return NextResponse.json({
-          id: user.id,
-          email: user.email,
-          name: user.name,
-        });
-      } catch (error: any) {
+      // Check for existing user
+      const existingUser = await db.collection('users').findOne({ email: normalizedEmail });
+      if (existingUser) {
         return NextResponse.json(
-          { error: error.message || 'User already exists' },
+          { error: 'An account with this email already exists' },
           { status: 400 }
         );
       }
+
+      // Hash password
+      const hashedPassword = await bcryptjs.hash(password, 10);
+
+      // Insert user directly
+      const result = await db.collection('users').insertOne({
+        email: normalizedEmail,
+        password: hashedPassword,
+        name: name.trim(),
+        volleyballsFound: 0,
+        volleyballsToday: 0,
+        lastPlayedDate: '',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      return NextResponse.json({
+        id: result.insertedId.toString(),
+        email: normalizedEmail,
+        name: name.trim(),
+      });
     }
 
-    // Use MongoDB
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    // Fallback to in-memory DB
+    try {
+      const user = await InMemoryDB.createUser({ email: normalizedEmail, password, name: name.trim() });
+      return NextResponse.json({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+      });
+    } catch (error: any) {
+      console.error('InMemory signup error:', error);
       return NextResponse.json(
-        { error: 'User already exists' },
+        { error: 'An account with this email already exists' },
         { status: 400 }
       );
     }
-
-    const user = await User.create({
-      email,
-      password,
-      name,
-    });
-
-    return NextResponse.json({
-      id: user._id,
-      email: user.email,
-      name: user.name,
-    });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Signup error:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
     return NextResponse.json(
-      { error: 'Failed to create user' },
+      { error: `Signup failed: ${error.message}` },
       { status: 500 }
     );
   }

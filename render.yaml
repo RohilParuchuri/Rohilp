@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: chess-moderno
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NEXTAUTH_URL
+        value: https://chess-moderno.onrender.com
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        value: ""
+      - key: NEXT_PUBLIC_SPOTIFY_PLAYLIST_EMBED_URL
+        value: ""
+      - key: SPOTIFY_PLAYLIST_ID
+        value: ""
+      - key: SPOTIFY_CLIENT_ID
+        value: ""
+      - key: SPOTIFY_CLIENT_SECRET
+        value: ""

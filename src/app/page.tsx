@@ -81,26 +81,26 @@ export default function Home() {
             What I Do
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+            <div className="bg-black/40 p-6 rounded-md border border-gray-700 shadow-sm transition hover:shadow-md themed-card">
               <div className="text-2xl mb-3">💻</div>
-              <h3 className="text-xl font-semibold text-black mb-2">Development</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-2">Development</h3>
+              <p className="text-gray-300">
                 Building modern web applications with clear, maintainable code and practical UX.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+            <div className="bg-black/40 p-6 rounded-md border border-gray-700 shadow-sm transition hover:shadow-md themed-card">
               <div className="text-2xl mb-3">🎨</div>
-              <h3 className="text-xl font-semibold text-black mb-2">Design</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-2">Design</h3>
+              <p className="text-gray-300">
                 Creating clean, usable interfaces focused on accessibility and clarity.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+            <div className="bg-black/40 p-6 rounded-md border border-gray-700 shadow-sm transition hover:shadow-md themed-card">
               <div className="text-2xl mb-3">🚀</div>
-              <h3 className="text-xl font-semibold text-black mb-2">Innovation</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-2">Innovation</h3>
+              <p className="text-gray-300">
                 Exploring practical solutions and building reliable prototypes that ship.
               </p>
             </div>
@@ -116,8 +116,8 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {['React', 'Next.js', 'TypeScript', 'Node.js', 'Flask', 'Tailwind CSS', 'Git', 'UI/UX'].map((skill) => (
-              <div key={skill} className="bg-white p-4 rounded-md text-center shadow-sm transition hover:shadow-md">
-                <p className="text-black font-medium text-lg">{skill}</p>
+              <div key={skill} className="bg-black/40 p-4 rounded-md text-center shadow-sm transition hover:shadow-md themed-card">
+                <p className="text-white font-medium text-lg">{skill}</p>
               </div>
             ))}
           </div>

@@ -53,7 +53,7 @@ export default function Home() {
               ) : (
                 <Link
                   href="/signin"
-                  className="px-8 py-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition transform hover:scale-105"
+                  className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition transform hover:scale-105"
                 >
                   Sign In
                 </Link>
@@ -182,7 +182,7 @@ export default function Home() {
                 <>
                   <Link
                     href="/signin"
-                    className="px-8 py-4 bg-gradient-to-r from-blue-600 to-red-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-red-500 transition transform hover:scale-105"
+                    className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition transform hover:scale-105"
                   >
                     Sign In
                   </Link>

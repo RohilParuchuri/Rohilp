@@ -129,7 +129,7 @@ export default function VolleyballGame({ onGameEnd, userEmail }: VolleyballGameP
       )}
 
       {gameActive && (
-        <div className="relative bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg h-96 overflow-hidden cursor-crosshair">
+        <div className="relative bg-gradient-to-br from-stone-800 to-amber-900 rounded-lg h-96 overflow-hidden cursor-crosshair">
           {volleyballs.map((vb) => (
             <button
               key={vb.id}

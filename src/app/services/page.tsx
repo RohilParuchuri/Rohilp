@@ -7,7 +7,7 @@ export default function Services() {
         </h1>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-amber-600 transition">
             <div className="text-5xl mb-4">🚀</div>
             <h3 className="text-2xl font-bold text-white mb-4">Web Development</h3>
             <ul className="text-gray-300 space-y-2">
@@ -19,7 +19,7 @@ export default function Services() {
             </ul>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-amber-600 transition">
             <div className="text-5xl mb-4">🎨</div>
             <h3 className="text-2xl font-bold text-white mb-4">Design & UX</h3>
             <ul className="text-gray-300 space-y-2">
@@ -31,7 +31,7 @@ export default function Services() {
             </ul>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-amber-600 transition">
             <div className="text-5xl mb-4">💡</div>
             <h3 className="text-2xl font-bold text-white mb-4">Consulting</h3>
             <ul className="text-gray-300 space-y-2">
@@ -48,22 +48,22 @@ export default function Services() {
           <h2 className="text-2xl font-bold text-white mb-4">My Process</h2>
           <div className="grid md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">01</div>
+              <div className="text-3xl font-bold text-amber-700 mb-2">01</div>
               <p className="text-white">Discovery</p>
               <p className="text-gray-400 text-sm">Understanding your needs</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">02</div>
+              <div className="text-3xl font-bold text-amber-700 mb-2">02</div>
               <p className="text-white">Planning</p>
               <p className="text-gray-400 text-sm">Designing the solution</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">03</div>
+              <div className="text-3xl font-bold text-amber-700 mb-2">03</div>
               <p className="text-white">Development</p>
               <p className="text-gray-400 text-sm">Building with excellence</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">04</div>
+              <div className="text-3xl font-bold text-amber-700 mb-2">04</div>
               <p className="text-white">Delivery</p>
               <p className="text-gray-400 text-sm">Launch & support</p>
             </div>

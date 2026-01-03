@@ -81,25 +81,27 @@ export default function Home() {
             What I Do
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-800/50 p-8 rounded-xl backdrop-blur hover:bg-gray-800/70 transition">
-              <div className="text-5xl mb-4">💻</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Development</h3>
-              <p className="text-gray-300">
-                Building modern web applications with cutting-edge technologies and best practices
+            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+              <div className="text-2xl mb-3">💻</div>
+              <h3 className="text-xl font-semibold text-black mb-2">Development</h3>
+              <p className="text-gray-700">
+                Building modern web applications with clear, maintainable code and practical UX.
               </p>
             </div>
-            <div className="bg-gray-800/50 p-8 rounded-xl backdrop-blur hover:bg-gray-800/70 transition">
-              <div className="text-5xl mb-4">🎨</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Design</h3>
-              <p className="text-gray-300">
-                Creating beautiful, intuitive user interfaces that provide exceptional user experiences
+
+            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+              <div className="text-2xl mb-3">🎨</div>
+              <h3 className="text-xl font-semibold text-black mb-2">Design</h3>
+              <p className="text-gray-700">
+                Creating clean, usable interfaces focused on accessibility and clarity.
               </p>
             </div>
-            <div className="bg-gray-800/50 p-8 rounded-xl backdrop-blur hover:bg-gray-800/70 transition">
-              <div className="text-5xl mb-4">🚀</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Innovation</h3>
-              <p className="text-gray-300">
-                Exploring new technologies and finding creative solutions to challenging problems
+
+            <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm transition hover:shadow-md">
+              <div className="text-2xl mb-3">🚀</div>
+              <h3 className="text-xl font-semibold text-black mb-2">Innovation</h3>
+              <p className="text-gray-700">
+                Exploring practical solutions and building reliable prototypes that ship.
               </p>
             </div>
           </div>
@@ -114,8 +116,8 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {['React', 'Next.js', 'TypeScript', 'Node.js', 'Flask', 'Tailwind CSS', 'Git', 'UI/UX'].map((skill) => (
-              <div key={skill} className="bg-gray-800/30 p-6 rounded-lg text-center hover:bg-gray-800/50 transition">
-                <p className="text-white font-semibold text-lg">{skill}</p>
+              <div key={skill} className="bg-white p-4 rounded-md text-center shadow-sm transition hover:shadow-md">
+                <p className="text-black font-medium text-lg">{skill}</p>
               </div>
             ))}
           </div>

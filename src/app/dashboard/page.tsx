@@ -138,16 +138,16 @@ export default function DashboardPage() {
             <p className="text-gray-300 text-sm mt-4">Member since today</p>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-amber-600 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
             <h3 className="text-gray-400 text-sm mb-2">Quick Links</h3>
             <div className="space-y-2 mt-4">
-              <Link href="/" className="block text-amber-300 hover:text-amber-200 text-sm transition">
+              <Link href="/" className="block text-blue-400 hover:text-blue-300 text-sm transition">
                 → Back to Home
               </Link>
-              <Link href="/about" className="block text-amber-300 hover:text-amber-200 text-sm transition">
+              <Link href="/about" className="block text-blue-400 hover:text-blue-300 text-sm transition">
                 → About Me
               </Link>
-              <Link href="/dashboard/volleyball" className="block text-amber-300 hover:text-amber-200 text-sm transition">
+              <Link href="/dashboard/volleyball" className="block text-blue-400 hover:text-blue-300 text-sm transition">
                 → Volleyball Challenge
               </Link>
             </div>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#2a1f1a] via-[#1a1410] to-[#1f1410] p-8 rounded-2xl border border-amber-800/50 shadow-[0_20px_60px_-25px_rgba(180,83,9,0.45)] mb-4">
+        <div className="bg-gradient-to-r from-[#001a3d] via-[#0d0d0d] to-[#1a0000] p-8 rounded-2xl border border-blue-700/50 shadow-[0_20px_60px_-25px_rgba(37,99,235,0.45)] mb-4">
           <div className="flex justify-between items-center gap-4 flex-wrap mb-6">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-indigo-300/70 mb-2">Curated Weekly</p>

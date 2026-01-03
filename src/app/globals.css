@@ -6,19 +6,12 @@
   --foreground: #ffffff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --foreground: #000000;
-  }
-}
-
 html {
   color-scheme: dark;
 }
 
 html.light {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
@@ -48,8 +41,8 @@ body {
 }
 
 .light {
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
 }
 
 /* Smooth transitions */

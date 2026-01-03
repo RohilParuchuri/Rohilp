@@ -54,7 +54,7 @@ export default function Blog() {
           {stories.map((story) => (
             <article
               key={story.title}
-              className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-amber-600/70 transition"
+              className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500/70 transition"
             >
               <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
                 <p className="text-gray-400 text-sm">{story.date}</p>
@@ -62,7 +62,7 @@ export default function Blog() {
                   {story.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1 rounded-full bg-amber-700/15 text-amber-200 border border-amber-700/30"
+                      className="text-xs px-3 py-1 rounded-full bg-blue-500/15 text-blue-200 border border-blue-500/30"
                     >
                       {tag}
                     </span>
@@ -77,7 +77,7 @@ export default function Blog() {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm transition"
+                    className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm transition"
                   >
                     {action.label}
                   </a>

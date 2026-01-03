@@ -13,7 +13,7 @@ export default function About() {
         </h1>
 
         <div className="grid md:grid-cols-[320px,1fr] gap-10 mb-12">
-          <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg">
+          <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg themed-card">
             <div className="relative aspect-square max-w-[220px] mx-auto bg-gradient-to-br from-blue-900/60 to-red-900/40 flex items-center justify-center">
               <div className="absolute inset-4 rounded-2xl bg-black/30 backdrop-blur" />
               <div className="absolute inset-0 animate-pulse bg-gradient-to-b from-blue-600/10 via-red-600/5 to-transparent" />
@@ -63,15 +63,15 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 themed-card">
             <h3 className="text-xl font-bold text-white mb-2">🎓 Education</h3>
             <p className="text-gray-300">Olentangy Liberty High School (2024-2028)</p>
           </div>
-          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 themed-card">
             <h3 className="text-xl font-bold text-white mb-2">💻 Expertise</h3>
             <p className="text-gray-300">React, Next.js, TypeScript, Node.js, MongoDB, AWS</p>
           </div>
-          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 themed-card">
             <h3 className="text-xl font-bold text-white mb-2">🏐 Passion</h3>
             <p className="text-gray-300">Volleyball, Innovation, Problem-solving</p>
           </div>
@@ -82,7 +82,7 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-4">
             {['JavaScript/TypeScript', 'React & Next.js', 'Node.js & Express', 'MongoDB & PostgreSQL',
               'AWS & Cloud Deployment', 'UI/UX Design', 'Responsive Design', 'API Development'].map((skill) => (
-              <div key={skill} className="bg-gray-800 px-4 py-3 rounded-lg border border-gray-700">
+              <div key={skill} className="bg-gray-800 px-4 py-3 rounded-lg border border-gray-700 themed-card">
                 <p className="text-white">{skill}</p>
               </div>
             ))}

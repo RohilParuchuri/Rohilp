@@ -7,7 +7,7 @@ export default function Services() {
         </h1>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition themed-card">
             <div className="text-5xl mb-4">🚀</div>
             <h3 className="text-2xl font-bold text-white mb-4">Web Development</h3>
             <ul className="text-gray-300 space-y-2">
@@ -19,7 +19,7 @@ export default function Services() {
             </ul>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition themed-card">
             <div className="text-5xl mb-4">🎨</div>
             <h3 className="text-2xl font-bold text-white mb-4">Design & UX</h3>
             <ul className="text-gray-300 space-y-2">
@@ -31,7 +31,7 @@ export default function Services() {
             </ul>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition">
+          <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500 transition themed-card">
             <div className="text-5xl mb-4">💡</div>
             <h3 className="text-2xl font-bold text-white mb-4">Consulting</h3>
             <ul className="text-gray-300 space-y-2">
@@ -44,7 +44,7 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="bg-gray-800 p-8 rounded-lg border border-gray-700">
+        <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 themed-card">
           <h2 className="text-2xl font-bold text-white mb-4">My Process</h2>
           <div className="grid md:grid-cols-4 gap-4">
             <div className="text-center">

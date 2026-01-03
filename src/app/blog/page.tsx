@@ -54,7 +54,7 @@ export default function Blog() {
           {stories.map((story) => (
             <article
               key={story.title}
-              className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500/70 transition"
+              className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-blue-500/70 transition themed-card"
             >
               <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
                 <p className="text-gray-400 text-sm">{story.date}</p>

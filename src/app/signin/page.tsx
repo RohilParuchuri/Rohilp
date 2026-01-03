@@ -55,7 +55,7 @@ function SignInContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="bg-gray-800 p-8 rounded-lg border border-gray-700">
+      <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 themed-card">
           <h1 className="text-3xl font-bold text-white mb-2 text-center">
             Sign In
           </h1>

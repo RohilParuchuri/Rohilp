@@ -137,7 +137,7 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-blue-600/30 hover:border-blue-500 transition">
+            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-blue-600/30 hover:border-blue-500 transition themed-card">
               <div className="text-5xl mb-4">🏐</div>
               <h3 className="text-2xl font-bold text-white mb-4">Volleyball Game</h3>
               <p className="text-gray-300 mb-4">
@@ -148,7 +148,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-green-500/30 hover:border-green-500 transition">
+            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-green-500/30 hover:border-green-500 transition themed-card">
               <div className="text-5xl mb-4">🎵</div>
               <h3 className="text-2xl font-bold text-white mb-4">Spotify Favorites</h3>
               <p className="text-gray-300 mb-4">
@@ -159,7 +159,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-red-600/30 hover:border-red-500 transition">
+            <div className="bg-black/40 backdrop-blur p-8 rounded-xl border border-red-600/30 hover:border-red-500 transition themed-card">
               <div className="text-5xl mb-4">🛠️</div>
               <h3 className="text-2xl font-bold text-white mb-4">Rohil's Projects</h3>
               <p className="text-gray-300 mb-4">

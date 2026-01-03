@@ -99,7 +99,7 @@ export default function VolleyballGame({ onGameEnd, userEmail }: VolleyballGameP
   };
 
   return (
-    <div className="bg-gray-800 p-8 rounded-lg border border-gray-700">
+    <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 themed-card">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-white">🏐 Volleyball Catch Game</h2>
         <div className="flex gap-6 items-center">

@@ -35,6 +35,9 @@ export default function Navbar() {
             <Link href="/contact" className="text-gray-300 hover:text-white transition">
               Contact
             </Link>
+            <a href="https://project1-ochre-eight.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition">
+              NBA
+            </a>
           </div>
 
           <div className="flex gap-4 items-center">

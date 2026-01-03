@@ -283,7 +283,7 @@ export default function DashboardPage() {
             {[
               { title: 'Volleyball Catch Challenge', desc: 'Mini-game built in React/Next with live scoring.', href: '/dashboard/volleyball', tag: 'Next.js' },
               { title: 'Spotify Embed Setup', desc: 'How the playlist embed and API fallback work.', href: '/projects/spotify-embed', tag: 'Docs' },
-              { title: 'NBA Games Database', desc: 'Explore historical NBA games with AI predictions.', href: 'https://project1-ochre-eight.vercel.app/', tag: 'Python/Vercel' },
+              { title: 'NBA Games Database', desc: 'Explore historical NBA games with AI predictions.', href: '/projects/rohil-resume-code', tag: 'Python/Vercel' },
             ].map((proj) => (
               <a
                 key={proj.title}

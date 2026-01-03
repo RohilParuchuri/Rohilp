@@ -39,7 +39,7 @@ export default function NBAGamesProject() {
         <a
           href="https://project1-ochre-eight.vercel.app/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="inline-block px-5 py-3 bg-orange-600 hover:bg-orange-500 text-white font-medium rounded transition"
         >
           Check it out →

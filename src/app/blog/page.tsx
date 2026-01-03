@@ -87,20 +87,7 @@ export default function Blog() {
           ))}
         </div>
 
-        <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <p className="text-white font-semibold">Want to add your own photo?</p>
-            <p className="text-gray-300 text-sm">
-              Drop a portrait image into <code className="font-mono">public/me.jpg</code> (or any name), then reference it with <code className="font-mono">/me.jpg</code> in the About page or navbar.
-            </p>
-          </div>
-          <a
-            href="/about"
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm transition"
-          >
-            Update About page
-          </a>
-        </div>
+        {/* Photo hint removed per user request */}
       </div>
     </div>
   );

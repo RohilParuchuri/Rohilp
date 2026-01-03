@@ -8,13 +8,12 @@ export default function VolleyballGame() {
   const { data: session } = useSession();
   const [score, setScore] = useState(0);
   const [volleyballs, setVolleyballs] = useState<number[]>([]);
-  const [topScores, setTopScores] = useState<Array<{ name: string; count: number }>>([]);
-
+  const [topScores, setTopScores] = useState<Array<{ name: string; count: number }>>([]);  const [timeLeft, setTimeLeft] = useState(15);
+  const [gameActive, setGameActive] = useState(true);
   useEffect(() => {
     // Load user's volleyball score
     if (session?.user?.email) {
-      fetch(`/api/volleyball?email=${session.user.email}`)
-        .then((res) => res.json())
+      fetch(`/api/volleyball?email=${session.user.email}`)\n        .then((res) => res.json())
         .then((data) => setScore(data.count || 0))
         .catch(console.error);
     }
@@ -24,18 +23,41 @@ export default function VolleyballGame() {
       .then((res) => res.json())
       .then((data) => setTopScores(data.topScores || []))
       .catch(console.error);
+  }, [session?.user?.email]);
 
-    // Add new volleyballs periodically
+  // Timer countdown
+  useEffect(() => {
+    if (!gameActive) return;
+    
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          setGameActive(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [gameActive]);
+
+  // Add new volleyballs periodically while game is active
+  useEffect(() => {
+    if (!gameActive) return;
+    
     const interval = setInterval(() => {
       if (volleyballs.length < 5) {
         setVolleyballs((prev) => [...prev, Date.now()]);
       }
-    }, 3000);
+    }, 1500);
 
     return () => clearInterval(interval);
-  }, [session?.user?.email, volleyballs.length]);
+  }, [gameActive, volleyballs.length]);
 
   const handleFoundVolleyball = async () => {
+    if (!gameActive) return;
+    
     const newScore = score + 1;
     setScore(newScore);
 
@@ -53,12 +75,36 @@ export default function VolleyballGame() {
     setVolleyballs((prev) => prev.slice(1));
   };
 
+  const handleReset = () => {
+    setTimeLeft(15);
+    setGameActive(true);
+    setScore(0);
+    setVolleyballs([]);
+  };
+
   return (
     <>
       {/* Floating Volleyballs */}
-      {volleyballs.map((id) => (
+      {gameActive && volleyballs.map((id) => (
         <Volleyball key={id} id={id} onFoundVolleyball={handleFoundVolleyball} />
       ))}
+
+      {/* Timer */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-black/90 border border-yellow-400 rounded-lg p-4 z-40">
+        <div className="text-center">
+          <p className={`text-4xl font-bold ${timeLeft <= 5 ? 'text-red-500' : 'text-yellow-400'}`}>
+            {timeLeft}s
+          </p>
+          {!gameActive && (
+            <button
+              onClick={handleReset}
+              className="mt-3 px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded transition"
+            >
+              Play Again
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* Leaderboard */}
       <div className="fixed top-20 right-4 bg-black/80 border border-gray-700 rounded-lg p-4 z-20 max-w-xs">

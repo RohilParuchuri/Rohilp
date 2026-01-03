@@ -1,4 +1,10 @@
+"use client";
+
+import { useSession } from 'next-auth/react';
+
 export default function About() {
+  const { data: session } = useSession();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-20">
@@ -38,6 +44,21 @@ export default function About() {
               Outside of coding, you'll usually find me playing volleyball, testing new tech, or hacking on side projects just to see
               what I can make next.
             </p>
+            <p className="text-gray-300 text-lg">
+              I'm a published blockchain researcher as well.
+            </p>
+            {session && (
+              <div className="mt-4">
+                <a
+                  href="https://www.linkedin.com/in/rohil-paruchuri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg text-sm transition"
+                >
+                  Connect on LinkedIn
+                </a>
+              </div>
+            )}
           </div>
         </div>
 

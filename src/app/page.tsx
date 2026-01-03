@@ -34,12 +34,22 @@ export default function Home() {
                 About Me
               </Link>
               {session ? (
-                <Link
-                  href="/dashboard"
-                  className="px-8 py-4 bg-green-500 text-black font-semibold rounded-lg hover:bg-green-400 transition transform hover:scale-105"
-                >
-                  Go to Dashboard
-                </Link>
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="px-8 py-4 bg-green-500 text-black font-semibold rounded-lg hover:bg-green-400 transition transform hover:scale-105"
+                  >
+                    Go to Dashboard
+                  </Link>
+                  <a
+                    href="https://www.linkedin.com/in/rohil-paruchuri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-4 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-600 transition transform hover:scale-105"
+                  >
+                    LinkedIn
+                  </a>
+                </>
               ) : (
                 <Link
                   href="/signin"

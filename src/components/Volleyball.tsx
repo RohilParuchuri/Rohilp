@@ -19,10 +19,11 @@ export default function Volleyball({ id, onFoundVolleyball }: VolleyballProps) {
     });
   }, []);
 
-  const handleClick = () => {
+  const handleInteraction = () => {
+    if (clicked) return;
     setClicked(true);
     onFoundVolleyball();
-    setTimeout(() => setClicked(false), 500);
+    setTimeout(() => setClicked(false), 300);
   };
 
   if (clicked) return null;
@@ -32,15 +33,17 @@ export default function Volleyball({ id, onFoundVolleyball }: VolleyballProps) {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
-      onClick={handleClick}
-      className="fixed w-12 h-12 rounded-full bg-white border-2 border-yellow-400 shadow-lg hover:scale-110 transition cursor-pointer flex items-center justify-center text-xl"
+      onClick={handleInteraction}
+      onPointerDown={handleInteraction}
+      onTouchStart={handleInteraction}
+      className="fixed w-28 h-28 rounded-full bg-white border-4 border-yellow-400 shadow-2xl hover:scale-110 transition cursor-pointer flex items-center justify-center text-6xl active:scale-90"
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
         zIndex: 30,
       }}
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.15 }}
+      whileTap={{ scale: 0.85 }}
     >
       🏐
     </motion.button>
